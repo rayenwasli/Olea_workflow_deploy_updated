@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: smooth rendering */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Small helper utilities for auth pages */
+@layer components {
+  .olea-focus { @apply focus:outline-none focus:ring-4 focus:ring-olea-500/25 focus:border-olea-800; }
+  .olea-card { @apply rounded-3xl border border-slate-200/70 bg-white/80 backdrop-blur shadow-soft; }
+  .olea-btn { @apply inline-flex items-center justify-center rounded-2xl px-4 py-3 font-semibold transition active:translate-y-px; }
+  .olea-btn-primary { @apply olea-btn bg-gradient-to-r from-olea-800 to-olea-700 text-white shadow hover:shadow-lg; }
+  .olea-btn-ghost { @apply olea-btn bg-white/60 text-slate-700 hover:bg-white; }
+}
+
+
+@layer base {
+  body { @apply bg-slate-50 text-slate-900; }
+}
+
+@layer components {
+  .h1 { @apply text-xl sm:text-2xl font-black tracking-tight text-slate-900; }
+  .muted { @apply text-sm text-slate-500; }
+  .card { @apply rounded-3xl border border-slate-200/70 bg-white/70 backdrop-blur shadow-soft; }
+
+  /* Form helpers (used inside modals and pages) */
+  .form { @apply space-y-4; }
+  .field { @apply space-y-1; }
+  .field > label { @apply block text-sm font-semibold text-slate-700; }
+  .help { @apply text-xs text-slate-500; }
+  .section { @apply rounded-3xl border border-slate-200/70 bg-white/60 p-4; }
+  .section-title { @apply text-sm font-black text-slate-900; }
+
+  .btn { @apply inline-flex items-center justify-center rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-white hover:shadow active:translate-y-px focus:outline-none focus:ring-4 focus:ring-olea-500/20 disabled:opacity-60 disabled:pointer-events-none; }
+  .btn.primary { @apply border-transparent bg-gradient-to-r from-olea-800 to-olea-700 text-white shadow hover:shadow-soft; }
+  .btn.ok { @apply border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100; }
+  .btn.warn { @apply border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100; }
+  .btn.danger { @apply border-red-200 bg-red-50 text-red-700 hover:bg-red-100; }
+
+  .input { @apply w-full rounded-2xl border-slate-200 bg-white/80 px-4 py-2.5 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-olea-500/25 focus:border-olea-800; }
+
+  .badge { @apply inline-flex items-center rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm; }
+  .badge.ok { @apply border-emerald-200 bg-emerald-50 text-emerald-800; }
+  .badge.warn { @apply border-amber-200 bg-amber-50 text-amber-800; }
+  .badge.danger { @apply border-red-200 bg-red-50 text-red-700; }
+
+  .table { @apply w-full text-left text-sm; }
+  .table thead th { @apply px-3 py-2 text-xs font-bold uppercase tracking-wider text-slate-500; }
+  .table tbody td { @apply px-3 py-3 align-top; }
+  .table tbody tr { @apply border-t border-slate-200/70; }
+  .table tbody tr:hover { @apply bg-slate-50/60; }
+
+  /* Responsive tables: wrap your <table className="table"> with <div className="table-wrap"> */
+  .table-wrap { @apply w-full overflow-x-auto; }
+
+  .row-actions { @apply inline-flex flex-wrap items-center justify-end gap-2; }
+}

@@ -1,0 +1,51 @@
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: scan-mysql
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    environment:
+      MYSQL_DATABASE: scan
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./backend
+    container_name: scan-backend
+    environment:
+      - PORT=8080
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=scan
+      - DB_USER=root
+      - DB_PASSWORD=
+      - JWT_SECRET=CHANGE_ME_TO_A_LONG_RANDOM_SECRET_AT_LEAST_32_CHARS
+      - JWT_EXPIRES_IN_SECONDS=43200
+      - CORS_ORIGINS=http://localhost:4200
+      - BORDEREAU_UPLOAD_DIR=/app/uploads/bordereaux
+      - BORDEREAU_UPLOAD_URL_PREFIX=/uploads/bordereaux/
+      - CHAT_UPLOAD_DIR=/app/uploads/chat
+      - CHAT_UPLOAD_URL_PREFIX=/uploads/chat/
+      - SYNC_DB=true
+      - SYNC_DB_ALTER=true
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    volumes:
+      - ./uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: scan-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
